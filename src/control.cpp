@@ -15,7 +15,7 @@ int main()
         motor.SetIdleMode(1);  // Brake
         motor.SetMotorType(0); // Brushed
         motor.SetInverted(true);
-        motor.ConfigBurnFlash();
+        motor.BurnFlash();
 
         // Loop for 5 seconds
         auto start = std::chrono::high_resolution_clock::now();

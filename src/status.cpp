@@ -18,7 +18,7 @@ int main()
         motor.SetMotorKv(565);
         motor.SetEncoderCountsPerRev(7168);
         motor.SetSensorType(1);
-        motor.ConfigBurnFlash();
+        motor.BurnFlash();
 
         // Loop for 10 seconds
         auto start = std::chrono::high_resolution_clock::now();
