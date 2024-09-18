@@ -12,12 +12,14 @@ int main()
     {
         // Initialize SparkFlex object with CAN interface and CAN ID
         SparkFlex motor("can0", 15);
-        motor.SetIdleMode(0); // Coast
+        motor.SetIdleMode(1); // Brake
         motor.SetRampRate(0.1);
-        motor.SetInverted(true);
+        motor.SetInverted(false);
         motor.SetMotorKv(565);
         motor.SetEncoderCountsPerRev(7168);
         motor.SetSensorType(1);
+        motor.SetSmartCurrentFreeLimit(20.0);
+        motor.SetSmartCurrentStallLimit(20.0);
         motor.BurnFlash();
 
         // Loop for 10 seconds
@@ -26,11 +28,11 @@ int main()
                    .count() < 10)
         {
             motor.Heartbeat();
-            motor.SetAppliedOutput(0.1);
+            motor.SetDutyCycle(0.2);
 
             std::cout << std::fixed << std::setprecision(2);
 
-            std::cout << "Applied Output: " << motor.GetAppliedOutput() << "" << std::endl;
+            std::cout << "Duty Cycle: " << motor.GetDutyCycle() << "" << std::endl;
             std::cout << "Velocity: " << motor.GetVelocity() << " RPM" << std::endl;
             std::cout << "Temperature: " << motor.GetTemperature() << " °C" << std::endl;
             std::cout << "Voltage: " << motor.GetVoltage() << " V" << std::endl;
