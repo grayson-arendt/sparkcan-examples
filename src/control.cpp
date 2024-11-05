@@ -1,5 +1,5 @@
-#include "SparkMax.hpp"
 #include <iostream>
+#include "SparkMax.hpp"
 
 /*
 This has been tested with the SPARK MAX connected to a NEO Brushless Motor V1.1.
@@ -12,6 +12,7 @@ int main()
         // Initialize SparkMax object with CAN interface and CAN ID
         SparkMax motor("can0", 18);
 
+        // Configure and flash parameters
         motor.SetIdleMode(IdleMode::kCoast);
         motor.SetMotorType(MotorType::kBrushless);
         motor.SetInverted(true);
@@ -23,6 +24,7 @@ int main()
                    std::chrono::high_resolution_clock::now() - start)
                    .count() < 10)
         {
+            // Enable and run motor
             SparkMax::Heartbeat();
             motor.SetDutyCycle(0.1);
             
